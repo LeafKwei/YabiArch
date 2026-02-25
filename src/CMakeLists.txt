@@ -7,7 +7,8 @@ set(DBG_NAME
 )
 
 set(COMMON_SRC
-
+    src/io/mem/MemoryIO.cpp
+    src/io/reg/RegTableIO.cpp
 )
 
 set(SRC
