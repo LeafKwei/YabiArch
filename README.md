@@ -40,8 +40,8 @@ RegTable、Peridevice、Memory三者都应该继承自接口UniIO：
 class UniIO{
 	int ioid() const noexcept =0;
     Errno     ioerr() const noexcept =0;
-	regsize_t in(regsize_t reg_addr_port) noexcept =0;
-    regsize_t out(regsize_t reg_addr_port, regsize_t data) noexcept =0;
+	regsize_t in(regsize_t reg_addr_port, size_t n) noexcept =0;
+    void out(regsize_t reg_addr_port, regsize_t data, size_t n) noexcept =0;
 };
 ```
 
