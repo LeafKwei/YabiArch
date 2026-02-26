@@ -11,7 +11,7 @@ using memunit_t = int8_t; //内存单元大小
 using charunit_t = int8_t;  //单字节大小
 using errnum_t = int;        //错误码
 using memaddr_t = uint64_t; //地址
-using iosize_t = uint8_t;    //UniIO数据大小
+using iosize_t = uint8_t;    //LinearIO、RandIO时的数据长度
 
 ////////////////////////// 指令相关 //////////////////////////
 using opmode_t = uint8_t; //指令模式
@@ -19,8 +19,7 @@ using optype_t = uint8_t;   //指令类型
 using opcode_t = uint8_t;  //指令操作码
 using opnumb_t = uint8_t;  //操作数数量
 using opsize_t = uint8_t; //操作数大小
-using addrmd_t = uint8_t;   //寻址方式
-using addrtg_t = uint8_t;   //寻址目标
+using addrmod_t = uint8_t;   //寻址方式
 
 YABI_END
 #endif

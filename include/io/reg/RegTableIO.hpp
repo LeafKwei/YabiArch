@@ -1,11 +1,11 @@
-#include <unordered_map>
-#include "io/UniIO.hpp"
+#include <vector>
+#include "io/RandIO.hpp"
 YABI_BEGIN
 
-class RegTableIO : public UniIO{
+class RegTableIO : public RandIO{
 public:
     RegTableIO();
-    void bezero() const noexcept;  //将所有寄存器置0
+    void bezero() noexcept;  //将所有寄存器置0
     int ioid() const noexcept;
     errnum_t ioerr() const noexcept;
     void cleanerr() noexcept;
@@ -13,13 +13,8 @@ public:
     void        out(memaddr_t reg_addr_port, regsize_t data, iosize_t n) noexcept;
 
 private:
-    regsize_t dfreg_;
     errnum_t err_;
-    std::unordered_map<int, regsize_t> regtable_;
-
-private:
-    void initRegtable();
-    regsize_t& addr2reg(memaddr_t addr);
+    std::vector<regsize_t> regtable_;   //初始化64个元素作为寄存器
 };
 
 YABI_END

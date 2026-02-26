@@ -41,6 +41,7 @@ regsize_t MemoryIO::in(memaddr_t addr, iosize_t n) noexcept{
         return data;
     }catch(...){
         err_ = EIO_MEM;
+        return 0;
     }
 }
 
@@ -48,6 +49,7 @@ void MemoryIO::out(memaddr_t addr, regsize_t data, iosize_t n) noexcept{
     try{
         if(addr >= mem_.size()) resizeMem(addr);  //超出内存范围则扩容
 
+        /* 取出每个字节，将这些字节从低地址向高地址方向依次保存 */
         for(iosize_t idx = 0; idx < n; idx++){
             memunit_t mu = getbyte(data, idx);
             mem_.at(addr + idx) = mu;

@@ -1,15 +1,15 @@
-#ifndef YABI_UNIIO_HPP
-#define YABI_UNIIO_HPP
+#ifndef YABI_RANDIO_HPP
+#define YABI_RANDIO_HPP
 
 #include "def/yabi.hpp"
 #include "def/err.hpp"
 #include "def/types.hpp"
 YABI_BEGIN
 
-/* 统一输出接口，将寄存器、内存、设备的输入输出统一为相同的方式 */
-class UniIO{
+/* 随机IO接口，将寄存器、内存、设备的输入输出统一为相同的方式 */
+class RandIO{
 public:
-    virtual ~UniIO() =default;
+    virtual ~RandIO() =default;
 	virtual int ioid() const noexcept =0;             //获取IO对象所属模块的ID
     virtual errnum_t ioerr() const noexcept =0; //获取IO错误标记
     virtual void cleanerr() noexcept =0;              //清除错误标记
