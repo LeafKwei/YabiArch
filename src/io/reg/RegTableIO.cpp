@@ -1,5 +1,5 @@
-#include "def/reg.hpp"
-#include "def/ioid.hpp"
+#include "def/io/reg.hpp"
+#include "def/io/ioid.hpp"
 #include "io/reg/RegTableIO.hpp"
 YABI_BEGIN
 
@@ -37,14 +37,13 @@ void RegTableIO::initRegtable(){
     /* 特殊寄存器 */
     regtable_.insert({QAX, 0});
     regtable_.insert({QBX, 0});
-    regtable_.insert({QCX, 0});
-    regtable_.insert({QDX, 0});
-    regtable_.insert({QMP, 0});
     regtable_.insert({QBP, 0});
-    regtable_.insert({QSP, 0});
-    regtable_.insert({QIP, 0});
     regtable_.insert({QSI, 0});
     regtable_.insert({QDI, 0});
+    regtable_.insert({QCX, 0});
+    regtable_.insert({QDX, 0});
+    regtable_.insert({QSP, 0});
+    regtable_.insert({QIP, 0});
     regtable_.insert({QEF, 0});
 
     /* 通用寄存器 */
