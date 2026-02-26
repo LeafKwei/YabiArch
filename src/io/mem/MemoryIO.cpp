@@ -24,7 +24,7 @@ void MemoryIO::cleanerr() noexcept{
     err_ = OK;
 }
 
-regsize_t MemoryIO::in(addr_t addr, iosize_t n) noexcept{
+regsize_t MemoryIO::in(memaddr_t addr, iosize_t n) noexcept{
     try{
         if(addr >= mem_.size()) resizeMem(addr);  //超出内存范围则扩容
 
@@ -44,7 +44,7 @@ regsize_t MemoryIO::in(addr_t addr, iosize_t n) noexcept{
     }
 }
 
-void MemoryIO::out(addr_t addr, regsize_t data, iosize_t n) noexcept{
+void MemoryIO::out(memaddr_t addr, regsize_t data, iosize_t n) noexcept{
     try{
         if(addr >= mem_.size()) resizeMem(addr);  //超出内存范围则扩容
 
@@ -57,7 +57,7 @@ void MemoryIO::out(addr_t addr, regsize_t data, iosize_t n) noexcept{
     }
 }
 
-void MemoryIO::resizeMem(addr_t addr){
+void MemoryIO::resizeMem(memaddr_t addr){
     mem_.resize(addr + MEM_RESZ_SIZE);
 }
 

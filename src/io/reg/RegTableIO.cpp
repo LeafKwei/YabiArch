@@ -25,11 +25,11 @@ void RegTableIO::cleanerr() noexcept{
     err_ = OK;
 }
 
-regsize_t RegTableIO::in(addr_t reg, iosize_t n) noexcept{
+regsize_t RegTableIO::in(memaddr_t reg, iosize_t n) noexcept{
     return addr2reg(reg);
 }
 
-void RegTableIO::out(addr_t reg, regsize_t data, iosize_t n) noexcept{
+void RegTableIO::out(memaddr_t reg, regsize_t data, iosize_t n) noexcept{
     addr2reg(reg) = data;
 }
 
@@ -59,7 +59,7 @@ void RegTableIO::initRegtable(){
     regtable_.insert({Q9, 0});
 }
 
-regsize_t& RegTableIO::addr2reg(addr_t addr){
+regsize_t& RegTableIO::addr2reg(memaddr_t addr){
     try{
         auto pair = regtable_.find(addr);
         if(pair != regtable_.end()){

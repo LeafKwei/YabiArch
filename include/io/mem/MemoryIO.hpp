@@ -11,15 +11,15 @@ public:
     int ioid() const noexcept override;
     errnum_t ioerr() const noexcept override;
     void cleanerr() noexcept override;
-	regsize_t in(addr_t addr, iosize_t n) noexcept override;
-    void out(addr_t addr, regsize_t data, iosize_t n) noexcept override;
+	regsize_t in(memaddr_t addr, iosize_t n) noexcept override;
+    void out(memaddr_t addr, regsize_t data, iosize_t n) noexcept override;
 
 private:
     errnum_t err_;
     std::vector<memunit_t> mem_;
 
 private:
-    void resizeMem(addr_t addr);
+    void resizeMem(memaddr_t addr);
 };
 
 YABI_END

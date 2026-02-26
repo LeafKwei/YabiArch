@@ -9,8 +9,8 @@ public:
     int ioid() const noexcept;
     errnum_t ioerr() const noexcept;
     void cleanerr() noexcept;
-	regsize_t in(addr_t reg_addr_port, iosize_t n) noexcept;
-    void        out(addr_t reg_addr_port, regsize_t data, iosize_t n) noexcept;
+	regsize_t in(memaddr_t reg_addr_port, iosize_t n) noexcept;  //寄存器IO强制按寄存器大小进行，因此参数n在此处无效
+    void        out(memaddr_t reg_addr_port, regsize_t data, iosize_t n) noexcept;
 
 private:
     regsize_t dfreg_;
@@ -19,7 +19,7 @@ private:
 
 private:
     void initRegtable();
-    regsize_t& addr2reg(addr_t addr);
+    regsize_t& addr2reg(memaddr_t addr);
 };
 
 YABI_END

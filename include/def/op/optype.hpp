@@ -1,5 +1,5 @@
-#ifndef YABI_OPCODE_HPP
-#define YABI_OPCODE_HPP
+#ifndef YABI_OPTYPE_HPP
+#define YABI_OPTYPE_HPP
 
 #include "def/yabi.hpp"
 #include "def/types.hpp"

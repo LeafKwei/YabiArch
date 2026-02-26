@@ -6,9 +6,9 @@
 YABI_BEGIN
 
 ////////////////////////// 终端端口 //////////////////////////
-constexpr addr_t PORT_TERM_IN = 0;
-constexpr addr_t PORT_TERM_OUT = 1;
-constexpr addr_t PORT_TERM_ERR = 2;
+constexpr memaddr_t PORT_TERM_IN = 0;
+constexpr memaddr_t PORT_TERM_OUT = 1;
+constexpr memaddr_t PORT_TERM_ERR = 2;
 
 YABI_END
 #endif
