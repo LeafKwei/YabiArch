@@ -16,15 +16,7 @@ int MemoryIO::ioid() const noexcept{
     return IOID_MEM;
 }
 
-errnum_t MemoryIO::ioerr() const noexcept{
-    return err_;
-}
-
-void MemoryIO::cleanerr() noexcept{
-    err_ = OK;
-}
-
-regsize_t MemoryIO::in(memaddr_t addr, iosize_t n) noexcept{
+regsize_t MemoryIO::in(memaddr_t addr, iosize_t n){
     try{
         if(addr >= mem_.size()) resizeMem(addr);  //超出内存范围则扩容
 
@@ -39,13 +31,12 @@ regsize_t MemoryIO::in(memaddr_t addr, iosize_t n) noexcept{
         }
 
         return data;
-    }catch(...){
-        err_ = EIO_MEM;
-        return 0;
+    }catch(std::exception e){
+        throw YabiExcept(EIO_MEM, e.what());
     }
 }
 
-void MemoryIO::out(memaddr_t addr, regsize_t data, iosize_t n) noexcept{
+void MemoryIO::out(memaddr_t addr, regsize_t data, iosize_t n){
     try{
         if(addr >= mem_.size()) resizeMem(addr);  //超出内存范围则扩容
 
@@ -54,8 +45,8 @@ void MemoryIO::out(memaddr_t addr, regsize_t data, iosize_t n) noexcept{
             memunit_t mu = getbyte(data, idx);
             mem_.at(addr + idx) = mu;
         }
-    }catch(...){
-        err_ = EIO_MEM;
+    }catch(std::exception e){
+        throw YabiExcept(EIO_MEM, e.what());
     }
 }
 

@@ -8,13 +8,11 @@ class PeriDeviceIO : public RandIO{
 public:
     PeriDeviceIO();
     int ioid() const noexcept override;
-    errnum_t ioerr() const noexcept override;
-    void cleanerr() noexcept override;
-	regsize_t in(memaddr_t addr, iosize_t n) noexcept override;
-    void out(memaddr_t addr, regsize_t data, iosize_t n) noexcept override;
+	regsize_t in(memaddr_t addr, iosize_t n) override;
+    void out(memaddr_t addr, regsize_t data, iosize_t n) override;
 
 private:
-    errnum_t err_;
+ 
 
 private:
     
