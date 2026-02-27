@@ -18,7 +18,7 @@ int RegTableIO::ioid() const noexcept{
     return IOID_REG;
 }
 
-regsize_t RegTableIO::in(memaddr_t reg, iosize_t n) noexcept{
+regunit_t RegTableIO::in(memaddr_t reg, iosize_t n) noexcept{
     try{
         return regtable_.at(reg & MAX_REG);
     }
@@ -27,7 +27,7 @@ regsize_t RegTableIO::in(memaddr_t reg, iosize_t n) noexcept{
     }
 }
 
-void RegTableIO::out(memaddr_t reg, regsize_t data, iosize_t n) noexcept{
+void RegTableIO::out(memaddr_t reg, regunit_t data, iosize_t n) noexcept{
     try{
         regtable_.at(reg & MAX_REG) = data;
     }

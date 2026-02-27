@@ -6,11 +6,13 @@
 YABI_BEGIN
 
 /////////////////////////// 通用类型 //////////////////////////////////
-using regsize_t = int64_t;   //寄存器大小，亦即虚拟机支持的最大位宽
+using regunit_t = int64_t;   //寄存器大小，亦即虚拟机支持的最大位宽
 using memunit_t = int8_t; //内存单元大小
-using charunit_t = int8_t;  //单字节大小
+using charunit_t = int8_t;  //单字符大小
+using byteunit_t = int8_t;  //单字节大小
+using seqsize_t = uint64_t; //序列长度
 using errnum_t = int;        //错误码
-using memaddr_t = uint64_t; //地址
+using memaddr_t = int64_t; //地址
 using iosize_t = uint8_t;    //LinearIO、RandIO时的数据长度
 
 ////////////////////////// 指令相关 //////////////////////////

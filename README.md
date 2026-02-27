@@ -15,7 +15,7 @@ registerInstruction函数负责向指令集中注册指令：
 void registerInstruction(
 	opcode_t opcode,      //操作码
     std::function<int(
-        regsize_t rip, 
+        regunit_t rip, 
         Memory *mem, 
         InstStruct *istruct)> rfunc, //InstStruct对象构造函数
     std::function<void(
@@ -40,8 +40,8 @@ RegTable、Peridevice、Memory三者都应该继承自接口UniIO：
 class UniIO{
 	int ioid() const noexcept =0;
     Errno     ioerr() const noexcept =0;
-	regsize_t in(regsize_t reg_addr_port, size_t n) noexcept =0;
-    void out(regsize_t reg_addr_port, regsize_t data, size_t n) noexcept =0;
+	regunit_t in(regunit_t reg_addr_port, size_t n) noexcept =0;
+    void out(regunit_t reg_addr_port, regunit_t data, size_t n) noexcept =0;
 };
 ```
 

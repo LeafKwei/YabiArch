@@ -11,12 +11,12 @@ class LinearIO{
 public:
     virtual ~LinearIO() =default;
 	virtual int ioid() const noexcept =0;             //获取IO对象所属模块的ID
-    virtual regsize_t addr() const noexcept =0;  //获取当前输入/输出的寄存器编号/内存地址
+    virtual regunit_t addr() const noexcept =0;  //获取当前输入/输出的寄存器编号/内存地址
     virtual iosize_t size() const noexcept =0;      //获取此IO对象的输入/输出字节数
     virtual void moveup() noexcept =0;              //向高地址方向移动size()字节，如果IO对象是寄存器，则此函数无效
     virtual void movedown() noexcept =0;         //向低地址方向移动size()字节，如果IO对象是寄存器，则此函数无效
-	virtual regsize_t in() =0;                                 //从当前寄存器/内存单位读取n字节
-    virtual void        out(regsize_t data) =0;        //向当前寄存器/内存单位输出n字节
+	virtual regunit_t in() =0;                                 //从当前寄存器/内存单位读取n字节
+    virtual void        out(regunit_t data) =0;        //向当前寄存器/内存单位输出n字节
 };
 
 YABI_END

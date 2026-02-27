@@ -11,8 +11,8 @@ class RandIO{
 public:
     virtual ~RandIO() =default;
 	virtual int ioid() const noexcept =0;             //获取IO对象所属模块的ID
-	virtual regsize_t in(memaddr_t reg_addr_port, iosize_t n) =0;    //从指定的寄存器/地址/端口中读入n个字节，不可超过regsize_t的大小(允许各个实现固定输入字节大小)
-    virtual void        out(memaddr_t reg_addr_port, regsize_t data, iosize_t n) =0; //向指定的寄存器/地址/端口中写入n个字节，不可超过regsize_t的大小(允许各个实现固定输出字节大小)
+	virtual regunit_t in(memaddr_t reg_addr_port, iosize_t n) =0;    //从指定的寄存器/地址/端口中读入n个字节，不可超过regunit_t的大小(允许各个实现固定输入字节大小)
+    virtual void        out(memaddr_t reg_addr_port, regunit_t data, iosize_t n) =0; //向指定的寄存器/地址/端口中写入n个字节，不可超过regunit_t的大小(允许各个实现固定输出字节大小)
 };
 
 YABI_END
