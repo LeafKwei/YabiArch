@@ -22,12 +22,12 @@ constexpr memaddr_t QIP = 0x08;   //指令指针寄存器
 constexpr memaddr_t QEF = 0x09;  //标志寄存器
 
 ////////////////////////// 通用寄存器 //////////////////////////
-constexpr memaddr_t Q0 = 0x0a;
-constexpr memaddr_t Q1 = 0x0b;
-constexpr memaddr_t Q2 = 0x0c;
-constexpr memaddr_t Q3 = 0x0d;
-constexpr memaddr_t Q4 = 0x0e;
-constexpr memaddr_t Q5 = 0x0f;
+constexpr memaddr_t Q0 = 0x0A;
+constexpr memaddr_t Q1 = 0x0B;
+constexpr memaddr_t Q2 = 0x0C;
+constexpr memaddr_t Q3 = 0x0D;
+constexpr memaddr_t Q4 = 0x0E;
+constexpr memaddr_t Q5 = 0x0F;
 constexpr memaddr_t Q6 = 0x10;
 constexpr memaddr_t Q7 = 0x11;
 constexpr memaddr_t Q8 = 0x12;

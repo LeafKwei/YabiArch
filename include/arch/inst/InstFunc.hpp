@@ -1,5 +1,5 @@
-#ifndef YABIARCH_INSTRUCTION_HPP
-#define YABIARCH_INSTRUCTION_HPP
+#ifndef YABIARCH_INSTFUNC_HPP
+#define YABIARCH_INSTFUNC_HPP
 
 #include <functional>
 #include "io/reg/RegTableIO.hpp"

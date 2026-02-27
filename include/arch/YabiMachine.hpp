@@ -1,6 +1,8 @@
 #ifndef YABI_MACHINE_HPP
 #define YABI_MACHINE_HPP
 
+#include <unordered_map>
+#include "arch/inst/InstFunc.hpp"
 #include "io/reg/RegTableIO.hpp"
 #include "io/mem/MemoryIO.hpp"
 #include "io/dev/PeriDeviceIO.hpp"
@@ -17,15 +19,24 @@ public:
     void restart();
 
 private:
+    bool alive_;
     memaddr_t entry_;
     InstStruct ins_;
     RegTableIO rtb_;
     MemoryIO mem_;
     PeriDeviceIO dev_;
     Addrmoder mod_;
+    InstFunc fallback_;
+    std::unordered_map<opcode_t, InstFunc> tidyinst_;    //精简指令
+    std::unordered_map<opcode_t, InstFunc> ordinst_;     //简单指令
+    std::unordered_map<opcode_t, InstFunc> compinst_; //复杂指令
 
 private:
-
+    InstFunc& findInst(optype_t type, opcode_t code);
+    memunit_t readMemunit();
+    void readOpcode();
+    void readAddrmod();
+    void setIO();
 };
 
 YABI_END
