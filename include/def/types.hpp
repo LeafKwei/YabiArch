@@ -13,7 +13,7 @@ using byteunit_t = int8_t;  //单字节大小
 using seqsize_t = uint64_t; //序列长度
 using errnum_t = int;        //错误码
 using memaddr_t = int64_t; //地址
-using iosize_t = uint8_t;    //LinearIO、RandIO时的数据长度
+using iosize_t = uint8_t;    //OrderedIO、RanomdIO时的数据长度
 
 ////////////////////////// 指令相关 //////////////////////////
 using opmode_t = uint8_t; //指令模式

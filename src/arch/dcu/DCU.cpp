@@ -1,7 +1,7 @@
 #include "def/io/reg.hpp"
 #include "def/op/optype.hpp"
+#include "arch/InstStruct.hpp"
 #include "arch/dcu/DCU.hpp"
-#include "arch/ixu/InstStruct.hpp"
 #include "io/reg/RegTableIO.hpp"
 #include "io/mem/MemoryIO.hpp"
 YABI_BEGIN

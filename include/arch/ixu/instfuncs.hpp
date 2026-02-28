@@ -1,0 +1,6 @@
+#ifndef YABIARCH_INSTFUNCS_HPP
+#define YABIARCH_INSTFUNCS_HPP
+
+
+
+#endif

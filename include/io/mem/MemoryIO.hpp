@@ -2,10 +2,10 @@
 #define YABI_MEMORYIO_HPP
 
 #include <vector>
-#include "io/RandIO.hpp"
+#include "io/RandomIO.hpp"
 YABI_BEGIN
 
-class MemoryIO : public RandIO{
+class MemoryIO : public RandomIO{
 public:
     MemoryIO();
     int ioid() const noexcept override;

@@ -1,7 +1,10 @@
 #ifndef YABI_ADU_HPP
 #define YABI_ADU_HPP
 
+#include <unordered_map>
 #include "def/yabi.hpp"
+#include "arch/adu/AddrFunc.hpp"
+#include "def/addrmod/addrmod.hpp"
 YABI_BEGIN
 
 /* 名称声明 */
@@ -18,6 +21,11 @@ public:
 private:
     RegTableIO *rtb_;
     MemoryIO *mem_;
+    std::unordered_map<addrmod_t, AddrFunc> addrmods_;
+
+private:
+    void registerAddrFuncs();
+    iosize_t opsize2iosize(opsize_t opsize);
 };
 
 YABI_END

@@ -1,10 +1,10 @@
 #ifndef YABI_PERIDEVICE_HPP
 #define YABI_PERIDEVICE_HPP
 
-#include "io/RandIO.hpp"
+#include "io/RandomIO.hpp"
 YABI_BEGIN
 
-class PeriDeviceIO : public RandIO{
+class PeriDeviceIO : public RandomIO{
 public:
     PeriDeviceIO();
     int ioid() const noexcept override;

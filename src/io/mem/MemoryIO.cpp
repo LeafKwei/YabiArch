@@ -29,7 +29,7 @@ regunit_t MemoryIO::in(memaddr_t addr, iosize_t n){
 
         return data;
     }catch(std::exception e){
-        throw YabiExcept(EIO_MEM, e.what());
+        throw YabiExcept(EIOMEM, e.what());
     }
 }
 
@@ -43,7 +43,7 @@ void MemoryIO::out(memaddr_t addr, regunit_t data, iosize_t n){
             mem_.at(addr + idx) = mu;
         }
     }catch(std::exception e){
-        throw YabiExcept(EIO_MEM, e.what());
+        throw YabiExcept(EIOMEM, e.what());
     }
 }
 

@@ -5,7 +5,7 @@
 #include "arch/dcu/DCU.hpp"
 #include "arch/adu/ADU.hpp"
 #include "arch/ixu/IXU.hpp"
-#include "arch/ixu/InstStruct.hpp"
+#include "arch/InstStruct.hpp"
 #include "io/reg/RegTableIO.hpp"
 #include "io/mem/MemoryIO.hpp"
 #include "io/dev/PeriDeviceIO.hpp"

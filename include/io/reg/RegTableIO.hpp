@@ -1,8 +1,8 @@
 #include <vector>
-#include "io/RandIO.hpp"
+#include "io/RandomIO.hpp"
 YABI_BEGIN
 
-class RegTableIO : public RandIO{
+class RegTableIO : public RandomIO{
 public:
     RegTableIO();
     void bezero() noexcept;  //将所有寄存器置0

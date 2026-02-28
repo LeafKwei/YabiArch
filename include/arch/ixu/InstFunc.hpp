@@ -10,7 +10,7 @@ class MemoryIO;
 class PeriDeviceIO;
 class InstStruct;
 
-/* 实现opcode对应的指令功能，每条指令允许访问寄存器、内存、设备、自身的指令结构体 */
+/* 指令函数类型，每种指令被实现为一个指令函数 */
 using InstFunc = std::function<void(RegTableIO *rtb, MemoryIO *mem, PeriDeviceIO *dev, InstStruct *ins)>;
 
 YABI_END

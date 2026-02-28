@@ -2,7 +2,7 @@
 #define YABI_INSTSTRUCT_HPP
 
 #include "def/types.hpp"
-#include "io/LinearIO.hpp"
+#include "io/OrderedIO.hpp"
 YABI_BEGIN
 
 /* 指令结构体，将二进制形式的指令结构化 */
@@ -12,8 +12,8 @@ struct InstStruct{
     opsize_t  opsize;
     addrmod_t modsrc;
     addrmod_t moddst;
-    LinearIO *src;
-    LinearIO *dst;
+    OrderedIO *src;
+    OrderedIO *dst;
 };
 
 YABI_END

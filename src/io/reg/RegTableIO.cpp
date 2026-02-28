@@ -23,7 +23,7 @@ regunit_t RegTableIO::in(memaddr_t reg, iosize_t n) noexcept{
         return regtable_.at(reg & MAX_REG);
     }
     catch(std::exception e){
-        throw YabiExcept(EIO_REG, e.what());
+        throw YabiExcept(EIOREG, e.what());
     }
 }
 
@@ -32,7 +32,7 @@ void RegTableIO::out(memaddr_t reg, regunit_t data, iosize_t n) noexcept{
         regtable_.at(reg & MAX_REG) = data;
     }
     catch(std::exception e){
-        throw YabiExcept(EIO_REG, e.what());
+        throw YabiExcept(EIOREG, e.what());
     }
 }
 
