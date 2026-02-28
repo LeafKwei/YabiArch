@@ -2,17 +2,18 @@
 #define YABI_MACHINE_HPP
 
 #include <unordered_map>
-#include "arch/inst/InstFunc.hpp"
+#include "arch/dcu/DCU.hpp"
+#include "arch/adu/ADU.hpp"
+#include "arch/ixu/IXU.hpp"
+#include "arch/ixu/InstStruct.hpp"
 #include "io/reg/RegTableIO.hpp"
 #include "io/mem/MemoryIO.hpp"
 #include "io/dev/PeriDeviceIO.hpp"
-#include "arch/inst/InstStruct.hpp"
-#include "addrmod/Addrmoder.hpp"
 YABI_BEGIN
 
 class YabiMachine{
 public:
-    YabiMachine() =default;
+    YabiMachine();
     void load(const byteunit_t *program, seqsize_t n, memaddr_t addr);
     void setEntry(memaddr_t addr);
     void start();
@@ -22,21 +23,19 @@ private:
     bool alive_;
     memaddr_t entry_;
     InstStruct ins_;
+
+    /* 设备 */
     RegTableIO rtb_;
     MemoryIO mem_;
     PeriDeviceIO dev_;
-    Addrmoder mod_;
-    InstFunc fallback_;
-    std::unordered_map<opcode_t, InstFunc> tidyinst_;    //精简指令
-    std::unordered_map<opcode_t, InstFunc> ordinst_;     //简单指令
-    std::unordered_map<opcode_t, InstFunc> compinst_; //复杂指令
+    
+    /* 核心组件 */
+    DCU dcu_;
+    ADU adu_;
+    IXU   ixu_;
 
 private:
-    InstFunc& findInst(optype_t type, opcode_t code);
-    memunit_t readMemunit();
-    void readOpcode();
-    void readAddrmod();
-    void setIO();
+
 };
 
 YABI_END
