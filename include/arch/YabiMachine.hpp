@@ -14,7 +14,7 @@ YABI_BEGIN
 class YabiMachine{
 public:
     YabiMachine();
-    void load(const byteunit_t *program, seqsize_t n, memaddr_t addr);
+    void load(const byte_t *program, seqsize_t n, memaddr_t addr);
     void setEntry(memaddr_t addr);
     void start();
     void restart();

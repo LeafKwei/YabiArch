@@ -1,6 +1,6 @@
 #include "def/config.hpp"
-#include "def/io/reg.hpp"
-#include "def/io/ioid.hpp"
+#include "def/reg.hpp"
+#include "def/ioid.hpp"
 #include "io/reg/RegTableIO.hpp"
 YABI_BEGIN
 
@@ -18,7 +18,7 @@ int RegTableIO::ioid() const noexcept{
     return IOID_REG;
 }
 
-regunit_t RegTableIO::in(memaddr_t reg, iosize_t n) noexcept{
+qword_t RegTableIO::in(memaddr_t reg, iosize_t n) noexcept{
     try{
         return regtable_.at(reg & MAX_REG);
     }
@@ -27,7 +27,7 @@ regunit_t RegTableIO::in(memaddr_t reg, iosize_t n) noexcept{
     }
 }
 
-void RegTableIO::out(memaddr_t reg, regunit_t data, iosize_t n) noexcept{
+void RegTableIO::out(memaddr_t reg, qword_t data, iosize_t n) noexcept{
     try{
         regtable_.at(reg & MAX_REG) = data;
     }

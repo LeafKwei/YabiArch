@@ -1,14 +1,12 @@
-#include "def/io/ioid.hpp"
+#include "def/ioid.hpp"
 #include "io/op/MemopIO.hpp"
 #include "io/mem/MemoryIO.hpp"
 YABI_BEGIN
 
-MemopIO::MemopIO(MemoryIO *mem, memaddr_t addr, iosize_t size)
-    : mem_(mem)
-    , addr_(addr)
-    , size_(size)
-{
-
+void MemopIO::setMem(MemoryIO *mem, memaddr_t addr, iosize_t size){
+    mem_= mem;
+    addr_ = addr;
+    size_ = size;
 }
 
 int MemopIO::ioid() const noexcept{
@@ -31,11 +29,11 @@ void MemopIO::movedown() noexcept{
     addr_ -= size_;
 }
 
-regunit_t MemopIO::in(){
+qword_t MemopIO::in(){
     return mem_ -> in(addr_, size_);
 }
 
-void MemopIO::out(regunit_t data){
+void MemopIO::out(qword_t data){
     mem_ -> out(addr_, data, size_);
 }
 

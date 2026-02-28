@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include "def/yabi.hpp"
 #include "arch/adu/AddrFunc.hpp"
-#include "def/addrmod/addrmod.hpp"
+#include "def/addrmod.hpp"
 YABI_BEGIN
 
 /* 名称声明 */

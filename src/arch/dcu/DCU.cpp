@@ -1,5 +1,5 @@
-#include "def/io/reg.hpp"
-#include "def/op/optype.hpp"
+#include "def/reg.hpp"
+#include "def/optype.hpp"
 #include "arch/InstStruct.hpp"
 #include "arch/dcu/DCU.hpp"
 #include "io/reg/RegTableIO.hpp"
@@ -19,10 +19,10 @@ void DCU::decode(InstStruct *ins){
 }
 
 memunit_t DCU::readMemunit(){
-    regunit_t qip = rtb_ -> in(QIP, sizeof(regunit_t));
+    qword_t qip = rtb_ -> in(QIP, sizeof(qword_t));
     memunit_t op = mem_ -> in(qip, sizeof(memunit_t));
     qip += sizeof(memunit_t);
-    rtb_ -> out(QIP, qip, sizeof(regunit_t));   //更新QIP寄存器
+    rtb_ -> out(QIP, qip, sizeof(qword_t));   //更新QIP寄存器
 }
 
 void DCU::readOpcode(InstStruct *ins){

@@ -13,31 +13,31 @@ YABI_BEGIN
  */
 inline int localpos(unsigned int pos) noexcept{
     /* 首先确保pos的大小不超过虚拟机的最大字长 */
-    assert(pos < sizeof(regunit_t));
+    assert(pos < sizeof(qword_t));
 
     /* 物理机是小端机器时，可直接返回小端位置 */
 #if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN_
     return pos;
 #else
-    return (sizeof(regunit_t) - 1) - pos;
+    return (sizeof(qword_t) - 1) - pos;
 #endif
 }
 
 /* 以大小端无关方式获取src指定位置的一个字节 */
-inline charunit_t getbyte(regunit_t src, unsigned int pos) noexcept{
+inline charunit_t getbyte(qword_t src, unsigned int pos) noexcept{
     charunit_t *p = reinterpret_cast<charunit_t*>(&src) + localpos(pos);
     return *p; 
 }
 
 /* 以大小端无关方式将字节b设置到src指定位置，返回设置后的src */
-inline regunit_t setbyte(regunit_t src, charunit_t b, unsigned int pos) noexcept{
+inline qword_t setbyte(qword_t src, charunit_t b, unsigned int pos) noexcept{
     charunit_t *p = reinterpret_cast<charunit_t*>(&src) + localpos(pos);
     *p = b;
     return src;
 }
 
 /* 以大小端无关方式将src指定位置的字节清零，返回清零后的src */
-inline regunit_t clrbyte(regunit_t src, unsigned int pos) noexcept{
+inline qword_t clrbyte(qword_t src, unsigned int pos) noexcept{
     charunit_t *p = reinterpret_cast<charunit_t*>(&src) + localpos(pos);
     *p = 0;
     return src;

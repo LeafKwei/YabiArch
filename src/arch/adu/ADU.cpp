@@ -1,5 +1,5 @@
 #include "arch/adu/ADU.hpp"
-#include "def/op/opsize.hpp"
+#include "def/opsize.hpp"
 YABI_BEGIN
 
 ADU::ADU(RegTableIO *rtb, MemoryIO *mem){
@@ -17,14 +17,14 @@ void ADU::registerAddrFuncs(){
 iosize_t ADU::opsize2iosize(opsize_t opsize){
     switch(opsize){
         case OPSIZE_BYTE:
-            return sizeof(byteunit_t);
+            return sizeof(byte_t);
         case OPSIZE_WORD:
-            return sizeof(int16_t);
+            return sizeof(word_t);
         case OPSIZE_DWOR:
-            return sizeof(int32_t);
+            return sizeof(dword_t);
         default:
         case OPSIZE_QWOR:
-            return sizeof(regunit_t);
+            return sizeof(qword_t);
     }
 }
 

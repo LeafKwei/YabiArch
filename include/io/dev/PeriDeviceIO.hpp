@@ -8,8 +8,8 @@ class PeriDeviceIO : public RandomIO{
 public:
     PeriDeviceIO();
     int ioid() const noexcept override;
-	regunit_t in(memaddr_t addr, iosize_t n) override;
-    void out(memaddr_t addr, regunit_t data, iosize_t n) override;
+	qword_t in(memaddr_t addr, iosize_t n) override;
+    void out(memaddr_t addr, qword_t data, iosize_t n) override;
 
 private:
  

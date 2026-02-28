@@ -1,12 +1,10 @@
-#include "def/io/ioid.hpp"
+#include "def/ioid.hpp"
 #include "io/op/ImmopIO.hpp"
 YABI_BEGIN
 
-ImmopIO::ImmopIO(regunit_t imm, iosize_t size)
-    : imm_(imm)
-    , size_(size)
-{
-
+void ImmopIO::setImm(qword_t imm, iosize_t size){
+    imm_ = imm;
+    size_ = size;
 }
 
 int ImmopIO::ioid() const noexcept{
@@ -30,11 +28,11 @@ void ImmopIO::movedown() noexcept{
     //此操作无效
 }   
 
-regunit_t ImmopIO::in(){
+qword_t ImmopIO::in(){
     return imm_;
 }   
 
-void ImmopIO::out(regunit_t data){
+void ImmopIO::out(qword_t data){
     //此操作无效
 }
 
