@@ -3,9 +3,12 @@
 
 #include <unordered_map>
 #include "arch/dcu/DCU.hpp"
+#include "arch/pcu/PCU.hpp"
 #include "arch/adu/ADU.hpp"
 #include "arch/ixu/IXU.hpp"
+#include "arch/mcu/MCU.hpp"
 #include "arch/InstStruct.hpp"
+#include "arch/MachineInf.hpp"
 #include "io/reg/RegTableIO.hpp"
 #include "io/mem/MemoryIO.hpp"
 #include "io/dev/PeriDeviceIO.hpp"
@@ -20,9 +23,9 @@ public:
     void restart();
 
 private:
-    bool alive_;
     memaddr_t entry_;
     InstStruct ins_;
+    MachineInf inf_;
 
     /* 设备 */
     RegTableIO rtb_;
@@ -31,11 +34,10 @@ private:
     
     /* 核心组件 */
     DCU dcu_;
+    PCU pcu_;
     ADU adu_;
-    IXU   ixu_;
-
-private:
-
+    IXU  ixu_;
+    MCU mcu_;
 };
 
 YABI_END

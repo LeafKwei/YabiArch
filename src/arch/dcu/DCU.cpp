@@ -4,6 +4,7 @@
 #include "arch/dcu/DCU.hpp"
 #include "io/reg/RegTableIO.hpp"
 #include "io/mem/MemoryIO.hpp"
+#include "agent/MemAgent.hpp"
 YABI_BEGIN
 
 DCU::DCU(RegTableIO *rtb, MemoryIO *mem)
@@ -19,10 +20,8 @@ void DCU::decode(InstStruct *ins){
 }
 
 memunit_t DCU::readMemunit(){
-    qword_t qip = rtb_ -> in(QIP, sizeof(qword_t));
-    memunit_t op = mem_ -> in(qip, sizeof(memunit_t));
-    qip += sizeof(memunit_t);
-    rtb_ -> out(QIP, qip, sizeof(qword_t));   //更新QIP寄存器
+    MemAgent agent(rtb_, mem_);
+    return agent.in(sizeof(memunit_t));
 }
 
 void DCU::readOpcode(InstStruct *ins){

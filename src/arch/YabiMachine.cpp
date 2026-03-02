@@ -8,7 +8,9 @@ YABI_BEGIN
 YabiMachine::YabiMachine()
     : dcu_(&rtb_, &mem_)
     , adu_(&rtb_, &mem_)
+    , pcu_(&rtb_, &mem_)
     , ixu_(&rtb_, &mem_, &dev_)
+    , mcu_(&rtb_, &mem_)
 {
 
 }
@@ -25,11 +27,13 @@ void YabiMachine::setEntry(memaddr_t addr){
 }
 
 void YabiMachine::start(){
-    alive_ = true;
-    while(alive_){
+    inf_.alive = true;
+    while(inf_.alive){
         dcu_.decode(&ins_);
+        pcu_.precheck(&ins_);
         adu_.addressing(&ins_);
         ixu_.execute(&ins_);
+        mcu_.control(&inf_);
     }
 }
 

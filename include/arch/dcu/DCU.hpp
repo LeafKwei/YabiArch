@@ -8,7 +8,7 @@ YABI_BEGIN
 /* 名称声明 */
 class RegTableIO;
 class MemoryIO;
-class InstStruct;
+struct InstStruct;
 
 /* DCU(DeCode Unit，译码单元)用于将二进制形式的指令基本信息解码到InstStruct结构体中 */
 class DCU{

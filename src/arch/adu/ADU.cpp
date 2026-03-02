@@ -10,10 +10,6 @@ void ADU::addressing(InstStruct *ins){
 
 }
 
-void ADU::registerAddrFuncs(){
-
-}
-
 iosize_t ADU::opsize2iosize(opsize_t opsize){
     switch(opsize){
         case OPSIZE_BYTE:

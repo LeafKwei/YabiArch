@@ -8,7 +8,7 @@ YABI_BEGIN
 class RegTableIO;
 class MemoryIO;
 class PeriDeviceIO;
-class InstStruct;
+struct InstStruct;
 
 /* 指令函数类型，每种指令被实现为一个指令函数 */
 using InstFunc = std::function<void(RegTableIO *rtb, MemoryIO *mem, PeriDeviceIO *dev, InstStruct *ins)>;

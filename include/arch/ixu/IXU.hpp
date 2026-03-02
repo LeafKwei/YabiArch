@@ -9,7 +9,7 @@ YABI_BEGIN
 class RegTableIO;
 class MemoryIO;
 class PeriDeviceIO;
-class InstStruct;
+struct InstStruct;
 
 /* IXU(Instruction eXecution Unit，指令执行单元)用于执行虚拟机给定的指令 */
 class IXU{

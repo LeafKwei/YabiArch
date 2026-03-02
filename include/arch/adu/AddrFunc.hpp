@@ -7,11 +7,11 @@ YABI_BEGIN
 
 /* 名称声明 */
 class RegTableIO;
-class MemoryIO;
-class InstStruct;
+class MemAgent;
+class OrderedIO;
 
 /* 寻址函数类型，每种寻址方式被实现为一个寻址函数 */
-using AddrFunc = std::function<iosize_t(RegTableIO *rtb, MemoryIO *mem, InstStruct *ins)>;
+using AddrFunc = std::function<void(RegTableIO *rtb, MemAgent *agent, iosize_t opsize, OrderedIO **op)>;
 
 YABI_END
 #endif
