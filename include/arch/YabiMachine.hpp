@@ -3,7 +3,6 @@
 
 #include <unordered_map>
 #include "arch/dcu/DCU.hpp"
-#include "arch/pcu/PCU.hpp"
 #include "arch/adu/ADU.hpp"
 #include "arch/ixu/IXU.hpp"
 #include "arch/mcu/MCU.hpp"
@@ -19,6 +18,7 @@ public:
     YabiMachine();
     void load(const byte_t *program, seqsize_t n, memaddr_t addr);
     void setEntry(memaddr_t addr);
+    void setDebug(DebugFunc dbg);
     void start();
     void restart();
 
@@ -34,7 +34,6 @@ private:
     
     /* 核心组件 */
     DCU dcu_;
-    PCU pcu_;
     ADU adu_;
     IXU  ixu_;
     MCU mcu_;

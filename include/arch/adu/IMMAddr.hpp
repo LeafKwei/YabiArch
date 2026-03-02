@@ -2,8 +2,6 @@
 #define YABI_IMMADDR_HPP
 
 #include "def/types.hpp"
-#include "def/reg.hpp"
-#include "arch/InstStruct.hpp"
 #include "io/op/ImmopIO.hpp"
 #include "io/reg/RegTableIO.hpp"
 #include "kit/MemAgent.hpp"
