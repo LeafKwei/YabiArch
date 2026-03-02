@@ -14,6 +14,7 @@ public:
     MemAgent(RegTableIO *rtb, MemoryIO *mem);
 	qword_t in(iosize_t n);      //从QIP指向的内存位置读取n个字节，同步更新QIP
     void undo();                      //撤销上一次读取时对QIP的更改
+    MemoryIO* memory();     //获取MemoryIO的指针
 
 private:
     qword_t       qip_;
