@@ -9,12 +9,13 @@ YABI_BEGIN
 class RegTableIO;
 class MemoryIO;
 struct MachineInf;
+struct InstStruct;
 
 /* MCU(Machine Control Unit，机器控制单元)负责在各阶段控制机器属性 */
 class MCU{
 public:
     MCU(RegTableIO *rtb, MemoryIO *mem);
-    void control(MachineInf *inf);
+    void control(MachineInf *inf, InstStruct *ins);
 
 private:
     RegTableIO *rtb_;

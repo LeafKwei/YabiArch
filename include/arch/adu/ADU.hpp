@@ -26,6 +26,8 @@ private:
     std::unordered_map<addrmod_t, AddrFunc> addrdst_;
 
 private:
+    void addressingFor(std::unordered_map<addrmod_t, AddrFunc> &funcs, addrmod_t mod,  iosize_t opsize, OrderedIO **op);
+    void registerAddrFunc(std::unordered_map<addrmod_t, AddrFunc> &funcs);
     iosize_t opsize2iosize(opsize_t opsize);
 };
 

@@ -4,7 +4,7 @@
 #include "arch/dcu/DCU.hpp"
 #include "io/reg/RegTableIO.hpp"
 #include "io/mem/MemoryIO.hpp"
-#include "agent/MemAgent.hpp"
+#include "kit/MemAgent.hpp"
 YABI_BEGIN
 
 DCU::DCU(RegTableIO *rtb, MemoryIO *mem)

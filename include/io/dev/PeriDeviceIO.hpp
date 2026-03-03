@@ -1,5 +1,5 @@
-#ifndef YABI_PERIDEVICE_HPP
-#define YABI_PERIDEVICE_HPP
+#ifndef YABI_PERIDEVICEIO_HPP
+#define YABI_PERIDEVICEIO_HPP
 
 #include "io/RandomIO.hpp"
 YABI_BEGIN

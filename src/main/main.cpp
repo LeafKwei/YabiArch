@@ -1,6 +1,7 @@
 #include <cstdio>
-#include "utility/utility.hpp"
+#include "arch/adu/ADU.hpp"
+using namespace yabi;
 
 int main(void){
-    
+    ADU adu(nullptr, nullptr);
 }

@@ -1,3 +1,6 @@
+#ifndef YABI_REGTABLEIO_HPP
+#define YABI_REGTABLEIO_HPP
+
 #include <vector>
 #include "io/RandomIO.hpp"
 YABI_BEGIN
@@ -15,3 +18,4 @@ private:
 };
 
 YABI_END
+#endif
