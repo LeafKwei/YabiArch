@@ -37,7 +37,7 @@ void YabiMachine::start(){
         dcu_.decode(&ins_);
         adu_.addressing(&ins_);
         ixu_.execute(&ins_);
-        mcu_.control(&inf_);
+        mcu_.control(&inf_, &ins_);
     }
 }
 

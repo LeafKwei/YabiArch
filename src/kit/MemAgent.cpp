@@ -17,6 +17,7 @@ qword_t MemAgent::in(iosize_t n){
     qip_ = qip;
     qip += n;
     rtb_ -> out(QIP, qip, sizeof(qword_t));
+    return data;
 }
 
 void MemAgent::undo(){

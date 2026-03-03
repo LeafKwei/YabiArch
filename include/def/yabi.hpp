@@ -1,7 +1,7 @@
 #ifndef YABI_HPP
 #define YABI_HPP
 
-#include <string>
+#include <iostream>
 #define YABI_BEGIN namespace yabi{
 #define YABI_END }
 

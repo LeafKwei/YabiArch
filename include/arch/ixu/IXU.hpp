@@ -2,6 +2,8 @@
 #define YABI_IXU_HPP
 
 #include <unordered_map>
+#include "def/yabi.hpp"
+#include "def/types.hpp"
 #include "arch/ixu/InstFunc.hpp"
 YABI_BEGIN
 
@@ -26,6 +28,7 @@ private:
     std::unordered_map<opcode_t, InstFunc> compinst_; //复杂指令
 
 private:
+    void executeFor(std::unordered_map<opcode_t, InstFunc> &insts, InstStruct *ins);
     void registerTidyInstructions();
     void registerOrdiInstructions();
     void registerCompInstructions();

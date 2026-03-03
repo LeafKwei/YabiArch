@@ -1,3 +1,4 @@
+#include "def/ioid.hpp"
 #include "io/op/RegopIO.hpp"
 #include "io/reg/RegTableIO.hpp"
 YABI_BEGIN
@@ -9,7 +10,7 @@ void RegopIO::setReg(RegTableIO *rtb, memaddr_t reg, iosize_t size){
 }
 
 int RegopIO::ioid() const noexcept{
-
+    return IOID_REGOP;
 }
 
 memaddr_t RegopIO::addr() const noexcept{

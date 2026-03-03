@@ -18,6 +18,7 @@ private:
 ////////////////////////// 错误码 //////////////////////////
 constexpr errnum_t OK = 0;
 constexpr errnum_t EADMOD = 1;     //错误的寻址模式
+constexpr errnum_t EOPCODE = 2;    //错误的指令编码    
 constexpr errnum_t EIOREG = 50;        //寄存器IO错误
 constexpr errnum_t EIOMEM = 51;      //内存IO错误
 constexpr errnum_t EIOTERM = 100;    //终端IO错误

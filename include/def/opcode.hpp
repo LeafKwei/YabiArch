@@ -7,12 +7,11 @@ YABI_BEGIN
 
 ////////////////////////// 指令操作码(精简指令) //////////////////////////
 constexpr opcode_t OPCODE_SHUT = 0x00;  //shut
+constexpr opcode_t OPCODE_DBG = 0x01;    //dbg
 
 ////////////////////////// 指令操作码(简单指令) //////////////////////////
 constexpr opcode_t OPCODE_JMP = 0x00;    //jmp dst
 constexpr opcode_t OPCODE_JMPE = 0x01;  //jmpe dst
-constexpr opcode_t OPCODE_JMPL = 0x02;  //jmpl dst
-constexpr opcode_t OPCODE_JMPG = 0x03;  //jmpg dst
 
 ////////////////////////// 指令操作码(复杂指令) //////////////////////////
 constexpr opcode_t OPCODE_MOV = 0x00;   //mov src, dst

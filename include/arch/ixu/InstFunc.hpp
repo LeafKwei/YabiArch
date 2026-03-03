@@ -1,6 +1,7 @@
 #ifndef YABIARCH_INSTFUNC_HPP
 #define YABIARCH_INSTFUNC_HPP
 
+#include "def/yabi.hpp"
 #include <functional>
 YABI_BEGIN
 
