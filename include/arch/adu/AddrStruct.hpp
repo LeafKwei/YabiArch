@@ -15,9 +15,9 @@ struct AddrStruct{
 };
 
 inline AddrStruct::AddrStruct(byte_t field){
-    base = field & 0xC0;
-    index = field & 0x30;
-    offset = field & 0x0C;
+    base = field & 0xC0 >> 6;
+    index = field & 0x30 >> 4;
+    offset = field & 0x0C >> 2;
     scale = field & 0x03;
 };
 

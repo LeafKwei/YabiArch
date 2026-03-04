@@ -27,7 +27,7 @@ memunit_t DCU::readMemunit(){
 void DCU::readOpcode(InstStruct *ins){
     memunit_t op = readMemunit();
     ins -> optype = (op & 0xC0) >> 6;   //获取操作码类型
-    ins -> opcode = (op & 0x3F);            //获取操作码
+    ins -> opcode = op;  //获取操作码
 }
 
 void DCU::readAddrmod(InstStruct *ins){

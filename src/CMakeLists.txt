@@ -40,6 +40,6 @@ add_executable(${BIN_NAME}
     ${SRC}
 )
 
-add_executable(${DBG_NAME}
-    ${DBG_SRC}
-)
+#add_executable(${DBG_NAME}
+#    ${DBG_SRC}
+#)

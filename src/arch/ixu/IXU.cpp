@@ -1,3 +1,4 @@
+#include "def/config.hpp"
 #include "def/opcode.hpp"
 #include "def/optype.hpp"
 #include "arch/ixu/IXU.hpp"
@@ -8,6 +9,7 @@ IXU::IXU(RegTableIO *rtb, MemoryIO *mem, PeriDeviceIO *dev)
     : rtb_(rtb)
     , mem_(mem)
     , dev_(dev)
+    , inst_(MAX_INST + 1)
 {
     registerTidyInstructions();
     registerOrdiInstructions();
@@ -15,47 +17,35 @@ IXU::IXU(RegTableIO *rtb, MemoryIO *mem, PeriDeviceIO *dev)
 }
 
 void IXU::execute(InstStruct *ins){
-    /* 根据指令类型选择不同指令集并交给executeFor函数搜索对应的指令执行 */
-    switch(ins -> optype){
-        case OPTYPE_TIDY:
-            executeFor(tidyinst_, ins);
-            return;
-        case OPTYPE_ORDI:
-            executeFor(ordinst_, ins);
-            return;
-            executeFor(compinst_, ins);
-        case OPTYPE_COMP:
-            return;
+    /* 使用指令编码作为索引从指令集中找到对应的指令并调用 */
+    try{
+        inst_.at(ins -> opcode)(rtb_, mem_, dev_, ins);
     }
-}
-
-void IXU::executeFor(std::unordered_map<opcode_t, InstFunc> &insts, InstStruct *ins){
-    auto pair = insts.find(ins -> opcode);
-    if(pair == insts.end()){
-        throw YabiExcept(EOPCODE);
+    catch(YabiExcept ye){
+        throw;
     }
-
-    pair -> second(rtb_, mem_, dev_, ins);
+    catch(std::exception e){
+        throw YabiExcept(EOPCODE, e.what());
+    }
 }
 
 void IXU::registerTidyInstructions(){
-    tidyinst_.insert({OPCODE_SHUT, inst_tidy_shut});
-    tidyinst_.insert({OPCODE_DBG, inst_tidy_dbg});
+    inst_.at(OPCODE_SHUT) = inst_tidy_shut;
+    inst_.at(OPCODE_DBG) = inst_tidy_dbg;
 }
 
 void IXU::registerOrdiInstructions(){
-    ordinst_.insert({OPCODE_JMP, inst_ordi_jmp});
-    ordinst_.insert({OPCODE_JMPE, inst_ordi_jmpe});
+    inst_.at(OPCODE_JMP) = inst_ordi_jmp;
+    inst_.at(OPCODE_JMPE) = inst_ordi_jmpe;
 }
 
 void IXU::registerCompInstructions(){
-    compinst_.insert({OPCODE_MOV, inst_comp_mov});
-    compinst_.insert({OPCODE_ADD, inst_comp_add});
-    compinst_.insert({OPCODE_SUB, inst_comp_sub});
-    compinst_.insert({OPCODE_CMP, inst_comp_cmp});
-    compinst_.insert({OPCODE_IN, inst_comp_in});
-    compinst_.insert({OPCODE_OUT, inst_comp_out});
-    
+    inst_.at(OPCODE_MOV) = inst_comp_mov;
+    inst_.at(OPCODE_ADD) = inst_comp_add;
+    inst_.at(OPCODE_SUB) = inst_comp_sub;
+    inst_.at(OPCODE_CMP) = inst_comp_cmp;
+    inst_.at(OPCODE_IN) = inst_comp_in;
+    inst_.at(OPCODE_OUT) = inst_comp_out;
 }
 
 YABI_END
