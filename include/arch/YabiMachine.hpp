@@ -16,11 +16,11 @@ YABI_BEGIN
 class YabiMachine{
 public:
     YabiMachine();
-    void load(const byte_t *program, seqsize_t n, memaddr_t addr);
-    void setEntry(memaddr_t addr);
-    void setDebug(DebugFunc dbg);
-    void start();
-    void restart();
+    void load(const byte_t *program, seqsize_t n, memaddr_t addr);       //加载一段程序到指定内存
+    void setEntry(memaddr_t addr);    //设置程序入口的内存地址
+    void setDebug(DebugFunc dbg);  //设置debug函数
+    void start();      //开始执行程序
+    void restart();   //重新执行程序
 
 private:
     memaddr_t entry_;

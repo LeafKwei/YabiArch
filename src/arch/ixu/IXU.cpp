@@ -25,7 +25,7 @@ void IXU::execute(InstStruct *ins){
         throw;
     }
     catch(std::exception e){
-        throw YabiExcept(EOPCODE, e.what());
+        throw YabiExcept(ERROPCODE, e.what());
     }
 }
 

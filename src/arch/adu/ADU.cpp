@@ -34,7 +34,7 @@ void ADU::addressing(InstStruct *ins){
 
 void ADU::addressingFor(std::unordered_map<addrmod_t, AddrFunc> &funcs, addrmod_t mod, iosize_t opsize, OrderedIO **op){
     auto pair = funcs.find(mod);
-    if(pair == funcs.end()) throw YabiExcept(EADMOD);
+    if(pair == funcs.end()) throw YabiExcept(ERRADMOD, "Unsupported addrmod.");
 
     MemAgent agent(rtb_, mem_);
     pair -> second(rtb_, &agent, opsize, op);

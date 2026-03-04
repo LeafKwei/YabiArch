@@ -5,10 +5,12 @@
 #include "def/types.hpp"
 YABI_BEGIN
 
-////////////////////////// 终端端口 //////////////////////////
+////////////////////////// 终端端口(0~31) //////////////////////////
 constexpr memaddr_t PORT_TERM_IN = 0;      //标准输入
 constexpr memaddr_t PORT_TERM_OUT = 1;  //标准输出
 constexpr memaddr_t PORT_TERM_ERR = 2;   //标准错误
+
+////////////////////////// [下一个设备]端口(32~63) //////////////////////////
 
 YABI_END
 #endif

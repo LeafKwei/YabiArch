@@ -23,7 +23,7 @@ qword_t RegTableIO::in(memaddr_t reg, iosize_t n){
         return regtable_.at(reg & MAX_REG);
     }
     catch(std::exception e){
-        throw YabiExcept(EIOREG, e.what());
+        throw YabiExcept(ERRIOREG, e.what());
     }
 }
 
@@ -32,7 +32,7 @@ void RegTableIO::out(memaddr_t reg, qword_t data, iosize_t n){
         regtable_.at(reg & MAX_REG) = data;
     }
     catch(std::exception e){
-        throw YabiExcept(EIOREG, e.what());
+        throw YabiExcept(ERRIOREG, e.what());
     }
 }
 

@@ -15,8 +15,16 @@ DCU::DCU(RegTableIO *rtb, MemoryIO *mem)
 }
 
 void DCU::decode(InstStruct *ins){
-    readOpcode(ins);
-    readAddrmod(ins);
+    try{
+        readOpcode(ins);
+        readAddrmod(ins);
+    }
+    catch(YabiExcept e){
+        throw;
+    }
+    catch(std::exception e){
+        throw YabiExcept(ERRDECODE, e.what());
+    }
 }
 
 memunit_t DCU::readMemunit(){
