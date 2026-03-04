@@ -17,16 +17,21 @@ qword_t TermIO::in(memaddr_t port, iosize_t n){
         case PORT_TERM_ERR:
             return in_port_stderr();
     }
+
+    return 0;
 }
 
 void TermIO::out(memaddr_t port, qword_t data, iosize_t n){
     switch(port){
         case PORT_TERM_IN:
             out_port_stdin(static_cast<byte_t>(data));
+            return;
         case PORT_TERM_OUT:
             out_port_stdout(static_cast<byte_t>(data));
+            return;
         case PORT_TERM_ERR:
             out_port_stderr(static_cast<byte_t>(data));
+            return;
     }
 }
 

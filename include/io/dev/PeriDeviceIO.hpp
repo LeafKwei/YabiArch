@@ -3,6 +3,7 @@
 
 #include <unordered_map>
 #include <memory>
+#include "def/config.hpp"
 #include "io/RandomIO.hpp"
 YABI_BEGIN
 
@@ -23,9 +24,14 @@ private:
     DeviceHub devices_;
 
 private:
+    memaddr_t port2key(memaddr_t port) const noexcept;
     bool checkOverride(memaddr_t lowport, memaddr_t highport) const;
     void registerDevices();
 };
+
+inline memaddr_t PeriDeviceIO::port2key(memaddr_t port) const noexcept{
+    return (port / PORT_ALLOC_SIZE);
+}
 
 YABI_END
 #endif

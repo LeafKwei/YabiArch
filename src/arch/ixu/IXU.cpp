@@ -21,10 +21,10 @@ void IXU::execute(InstStruct *ins){
     try{
         inst_.at(ins -> opcode)(rtb_, mem_, dev_, ins);
     }
-    catch(YabiExcept ye){
+    catch(YabiExcept &e){
         throw;
     }
-    catch(std::exception e){
+    catch(std::exception &e){
         throw YabiExcept(ERROPCODE, e.what());
     }
 }

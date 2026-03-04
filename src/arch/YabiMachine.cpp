@@ -16,9 +16,9 @@ YabiMachine::YabiMachine()
 
 }
 
-void YabiMachine::load(const byte_t *program, seqsize_t n ,memaddr_t addr){
+void YabiMachine::load(const ubyte_t *program, seqsize_t n ,memaddr_t addr){
     for(seqsize_t idx = 0; idx < n; idx++){
-        mem_.out(addr + idx, program[idx], sizeof(byte_t));
+        mem_.out(addr + idx, program[idx], sizeof(ubyte_t));
     }
 }
 

@@ -14,6 +14,7 @@ set(COMMON_SRC
     arch/mcu/MCU.cpp
 
     io/dev/PeriDeviceIO.cpp
+    io/dev/term/TermIO.cpp
     io/mem/MemoryIO.cpp
     io/op/ImmopIO.cpp
     io/op/MemopIO.cpp
@@ -32,14 +33,29 @@ set(DBG_SRC
     ${COMMON_SRC}
 )
 
+#头文件目录
 include_directories(
     ../include
 )
 
+#可执行文件
 add_executable(${BIN_NAME}
     ${SRC}
 )
 
 #add_executable(${DBG_NAME}
 #    ${DBG_SRC}
+#)
+
+#编译选项(gcc)
+target_compile_options(${BIN_NAME} PRIVATE
+    -Wall
+    -Wextra
+    -Wpedantic
+)
+
+#target_compile_options(${DBG_NAME}
+#    -Wall
+#    -Wextra
+#    -Wpedantic
 #)

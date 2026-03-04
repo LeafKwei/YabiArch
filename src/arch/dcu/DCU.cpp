@@ -19,10 +19,10 @@ void DCU::decode(InstStruct *ins){
         readOpcode(ins);
         readAddrmod(ins);
     }
-    catch(YabiExcept e){
+    catch(YabiExcept &e){
         throw;
     }
-    catch(std::exception e){
+    catch(std::exception &e){
         throw YabiExcept(ERRDECODE, e.what());
     }
 }
@@ -33,7 +33,7 @@ memunit_t DCU::readMemunit(){
 }
 
 void DCU::readOpcode(InstStruct *ins){
-    memunit_t op = readMemunit();
+    ubyte_t op = readMemunit();
     ins -> optype = (op & 0xC0) >> 6;   //获取操作码类型
     ins -> opcode = op;  //获取操作码
 }
@@ -41,7 +41,7 @@ void DCU::readOpcode(InstStruct *ins){
 void DCU::readAddrmod(InstStruct *ins){
     if(ins -> optype == OPTYPE_TIDY) return;   //对于精简指令则不读取寻址字段
 
-    memunit_t mod = readMemunit();
+    ubyte_t mod = readMemunit();
     ins -> opsize = (mod & 0xC0) >> 6;  //获取操作数大小
     ins -> modsrc = (mod & 0x38) >> 3; //获取源操作数的寻址方式
     ins -> moddst = (mod & 0x07);         //获取目的操作数的寻址方式

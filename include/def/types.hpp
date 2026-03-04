@@ -9,16 +9,23 @@ YABI_BEGIN
 using memunit_t = int8_t; //内存单元大小
 using charunit_t = int8_t;  //单字符大小
 using seqsize_t = uint64_t; //序列长度
-using errnum_t = int;        //错误码
-using memaddr_t = int64_t; //地址
+using errnum_t = uint32_t;      //错误码
+using memaddr_t = uint64_t; //地址
 using iosize_t = uint8_t;    //OrderedIO、RanomdIO时的数据长度
 
-////////////////////////// 机器支持的数据宽度 ////////////////////////////
+////////////////////////// 机器支持的数据宽度(有符号) ////////////////////////////
 using byte_t = int8_t;     //单字节大小
 using word_t = int16_t;  //单字大小
 using dword_t = int32_t; //双字大小
 using qword_t = int64_t; //四字大小
 using maxword_t = qword_t; //虚拟机支持的最大字长
+
+////////////////////////// 机器支持的数据宽度(无符号) ////////////////////////////
+using ubyte_t = uint8_t;     //单字节大小
+using uword_t = uint16_t;  //单字大小
+using udword_t = uint32_t; //双字大小
+using uqword_t = uint64_t; //四字大小
+using umaxword_t = uqword_t; //虚拟机支持的最大字长
 
 ////////////////////////// 指令相关 //////////////////////////
 using opmode_t = uint8_t; //指令模式

@@ -30,7 +30,7 @@ void RegopIO::movedown() noexcept{
 }
 
 qword_t RegopIO::in(){
-    return (reg_, size_);
+    return rtb_ -> in(reg_, size_);
 }
 
 void RegopIO::out(qword_t data){
