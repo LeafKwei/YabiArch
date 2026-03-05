@@ -20,14 +20,17 @@ public:
     void addressing(InstStruct *ins);
 
 private:
-    RegTableIO *rtb_;
-    MemoryIO *mem_;
-    std::unordered_map<addrmod_t, AddrFunc> addrsrc_;
-    std::unordered_map<addrmod_t, AddrFunc> addrdst_;
+    using AddrFuncMap = std::unordered_map<addrmod_t, AddrFunc>;
 
 private:
-    void addressingFor(std::unordered_map<addrmod_t, AddrFunc> &funcs, addrmod_t mod,  iosize_t opsize, OrderedIO **op);
-    void registerAddrFunc(std::unordered_map<addrmod_t, AddrFunc> &funcs);
+    RegTableIO *rtb_;
+    MemoryIO *mem_;
+    AddrFuncMap addrsrc_;
+    AddrFuncMap addrdst_;
+
+private:
+    void addressingFor(AddrFuncMap &funcs, addrmod_t mod,  iosize_t opsize, OrderedIO **op);
+    void registerAddrFunc(AddrFuncMap &funcs);
     iosize_t opsize2iosize(opsize_t opsize);
 };
 

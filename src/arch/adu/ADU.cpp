@@ -14,7 +14,10 @@
 #include "arch/adu/SCAAddr.hpp"
 YABI_BEGIN
 
-ADU::ADU(RegTableIO *rtb, MemoryIO *mem){
+ADU::ADU(RegTableIO *rtb, MemoryIO *mem)
+    : rtb_(rtb)
+    , mem_(mem)
+{
     /* 分别为源操作数和目的操作数各注册一套寻址对象，避免当两个操作数寻址方式相同时导致寻址对象被共用而出现冲突 */
     registerAddrFunc(addrsrc_);
     registerAddrFunc(addrdst_);
@@ -24,9 +27,11 @@ void ADU::addressing(InstStruct *ins){
     switch(ins -> optype){
         case OPTYPE_TIDY:    //精简指令不进行寻址
             return;
-        case OPTYPE_COMP: //复杂指令对两个操作数寻址(利用fall-through完成dst的寻址)
-            addressingFor(addrsrc_, ins -> modsrc, opsize2iosize(ins -> opsize), &(ins -> src));
         case OPTYPE_ORDI:   //简单指令只对目的操作数寻址
+            addressingFor(addrdst_, ins -> moddst, opsize2iosize(ins -> opsize), &(ins -> dst));
+            return;
+        case OPTYPE_COMP: //复杂指令对两个操作数寻址
+            addressingFor(addrsrc_, ins -> modsrc, opsize2iosize(ins -> opsize), &(ins -> src));
             addressingFor(addrdst_, ins -> moddst, opsize2iosize(ins -> opsize), &(ins -> dst));
             return;
     }

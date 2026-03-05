@@ -52,6 +52,7 @@ target_compile_options(${BIN_NAME} PRIVATE
     -Wall
     -Wextra
     -Wpedantic
+    -Wno-unused-parameter
 )
 
 #target_compile_options(${DBG_NAME}
