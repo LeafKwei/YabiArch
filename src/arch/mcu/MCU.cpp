@@ -16,7 +16,7 @@ MCU::MCU(RegTableIO &rtb, MemoryIO &mem)
     : rtb_(rtb)
     , mem_(mem)
 {
-
+    registerCntlFuncs();
 }
 
 void MCU::control(MachineInf &inf, InstStruct &ins){

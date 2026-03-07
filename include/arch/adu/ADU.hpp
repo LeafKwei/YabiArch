@@ -31,7 +31,7 @@ private:
     void addressingSRC(InstStruct &ins);
     void addressingDST(InstStruct &ins);
     void addressingOn(addrmod_t mod, iosize_t size, OrderedIO *op);
-    OrderedIO* selectIO(IOBundle *bundle, addrmod_t mod);
+    OrderedIO* selectIO(IOBundle &bundle, addrmod_t mod);
     void registerAddrFuncs();
     iosize_t opsize2iosize(opsize_t opsize);
 };

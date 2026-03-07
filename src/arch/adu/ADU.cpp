@@ -40,13 +40,13 @@ void ADU::addressing(InstStruct &ins){
 }
 
 void ADU::addressingSRC(InstStruct &ins){
-    OrderedIO *op = selectIO(&srcbundle_, ins. modsrc);
+    OrderedIO *op = selectIO(srcbundle_, ins. modsrc);
     ins. src = op;
     addressingOn(ins. modsrc, opsize2iosize(ins. opsize), ins. src);
 }
 
 void ADU::addressingDST(InstStruct &ins){
-    OrderedIO *op = selectIO(&srcbundle_, ins. moddst);
+    OrderedIO *op = selectIO(dstbundle_, ins. moddst);
     ins. dst = op;
     addressingOn(ins. modsrc, opsize2iosize(ins. opsize), ins. dst);
 }
@@ -61,15 +61,15 @@ void ADU::addressingOn(addrmod_t mod, iosize_t size, OrderedIO *op){
     pair -> second(rtb_, agent, size, op);
 }
 
-OrderedIO* ADU::selectIO(IOBundle *bundle, addrmod_t mod){
+OrderedIO* ADU::selectIO(IOBundle &bundle, addrmod_t mod){
     /* 根据寻址方式的不同返回相应的IO对象地址 */
     switch(mod){
         case ADDRMOD_IMM:
-            return &(bundle -> immop);
+            return &(bundle.immop);
         case ADDRMOD_REG:
-            return &(bundle -> regop);
+            return &(bundle.regop);
         default:
-            return &(bundle -> memop);
+            return &(bundle.memop);
     }
 }
 
