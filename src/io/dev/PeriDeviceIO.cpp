@@ -22,9 +22,6 @@ qword_t PeriDeviceIO::in(memaddr_t port, iosize_t n){
 
         return pair -> second -> in(port, n);
     }
-    catch(YabiExcept &e){
-        throw;
-    }
     catch(std::exception &e){
         throw YabiExcept(ERRIODEV, e.what());
     }
@@ -38,9 +35,6 @@ void PeriDeviceIO::out(memaddr_t port, qword_t data, iosize_t n){
         }
 
         pair -> second -> out(port, data, n);
-    }
-    catch(YabiExcept &e){
-        throw;
     }
     catch(std::exception &e){
         throw YabiExcept(ERRIODEV, e.what());

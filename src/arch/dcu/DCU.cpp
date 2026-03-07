@@ -7,6 +7,11 @@
 #include "kit/MemAgent.hpp"
 YABI_BEGIN
 
+/**
+ * 解码过程可概括为：DCU首先从QIP指向的当前内存地址上读取1字节，根据高位2bit判断该指令是无操作数指令还是有操作数指令，
+ * 如果是有操作数指令，那么再继续读取1字节，解析寻址方式
+ */
+
 DCU::DCU(RegTableIO *rtb, MemoryIO *mem)
     : rtb_(rtb)
     , mem_(mem)
@@ -19,11 +24,8 @@ void DCU::decode(InstStruct *ins){
         readOpcode(ins);
         readAddrmod(ins);
     }
-    catch(YabiExcept &e){
-        throw;
-    }
     catch(std::exception &e){
-        throw YabiExcept(ERRDECODE, e.what());
+        throw YabiExcept(ERRDCU, e.what());
     }
 }
 

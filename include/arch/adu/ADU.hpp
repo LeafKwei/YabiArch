@@ -1,17 +1,13 @@
 #ifndef YABI_ADU_HPP
 #define YABI_ADU_HPP
 
-#include <unordered_map>
 #include "def/yabi.hpp"
 #include "def/addrmod.hpp"
+#include "arch/adu/IOBundle.hpp"
 #include "arch/adu/AddrFunc.hpp"
+#include "arch/adu/addrfuncs.hpp"
 
 YABI_BEGIN
-
-/* 名称声明 */
-class RegTableIO;
-class MemoryIO;
-struct InstStruct;
 
 /* ADU(ADdressing Unit，寻址单元)按照寻址方式生成IO对象并设置到InstStruct中 */
 class ADU{
@@ -25,12 +21,16 @@ private:
 private:
     RegTableIO *rtb_;
     MemoryIO *mem_;
-    AddrFuncMap addrsrc_;
-    AddrFuncMap addrdst_;
+    IOBundle    srcbundle_;
+    IOBundle    dstbundle_;
+    AddrFuncMap addrfuncs_;
 
 private:
-    void addressingFor(AddrFuncMap &funcs, addrmod_t mod,  iosize_t opsize, OrderedIO **op);
-    void registerAddrFunc(AddrFuncMap &funcs);
+    void addressingSRC(InstStruct *ins);
+    void addressingDST(InstStruct *ins);
+    void addressingOn(addrmod_t mod, iosize_t size, OrderedIO *op);
+    OrderedIO* selectIO(IOBundle *bundle, addrmod_t mod);
+    void registerAddrFunc();
     iosize_t opsize2iosize(opsize_t opsize);
 };
 

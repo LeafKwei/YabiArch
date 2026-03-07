@@ -8,6 +8,11 @@
 #include "utility/bit.hpp"
 YABI_BEGIN
 
+/**
+ * 机器控制过程可概括为：MCU遍历每一个已注册的控制函数，然后将RegTableIO、MemoryIO、MachineInf、InstStruct全部传递给该函数，
+ * 由其处理具体的控制行为
+ */
+
 MCU::MCU(RegTableIO *rtb, MemoryIO *mem)
     : rtb_(rtb)
     , mem_(mem)

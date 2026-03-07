@@ -4,56 +4,83 @@
 #include "def/optype.hpp"
 #include "def/addrmod.hpp"
 #include "arch/InstStruct.hpp"
-#include "arch/adu/IMMAddr.hpp"
-#include "arch/adu/REGAddr.hpp"
-#include "arch/adu/DIRAddr.hpp"
-#include "arch/adu/INDAddr.hpp"
-#include "arch/adu/BASAddr.hpp"
-#include "arch/adu/IDXAddr.hpp"
-#include "arch/adu/BXIAddr.hpp"
-#include "arch/adu/SCAAddr.hpp"
 YABI_BEGIN
+
+/**
+ * 寻址过程可概括为：根据源操作数或目的操作数的不同从不同的IOBundle中获取与寻址方式匹配的IO对象地址，
+ * 然后由寻址函数对操作数进行寻址，将寻址结构设置到IO对象中，而后指令执行时就可直接通过IO对象获取到
+ * 操作数，无需关心操作数的来源
+ */
 
 ADU::ADU(RegTableIO *rtb, MemoryIO *mem)
     : rtb_(rtb)
     , mem_(mem)
 {
-    /* 分别为源操作数和目的操作数各注册一套寻址对象，避免当两个操作数寻址方式相同时导致寻址对象被共用而出现冲突 */
-    registerAddrFunc(addrsrc_);
-    registerAddrFunc(addrdst_);
+    registerAddrFunc();
 }
 
 void ADU::addressing(InstStruct *ins){
-    switch(ins -> optype){
-        case OPTYPE_TIDY:    //精简指令不进行寻址
-            return;
-        case OPTYPE_ORDI:   //简单指令只对目的操作数寻址
-            addressingFor(addrdst_, ins -> moddst, opsize2iosize(ins -> opsize), &(ins -> dst));
-            return;
-        case OPTYPE_COMP: //复杂指令对两个操作数寻址
-            addressingFor(addrsrc_, ins -> modsrc, opsize2iosize(ins -> opsize), &(ins -> src));
-            addressingFor(addrdst_, ins -> moddst, opsize2iosize(ins -> opsize), &(ins -> dst));
-            return;
+    try{
+        switch(ins -> optype){
+            case OPTYPE_TIDY:    //精简指令不进行寻址
+                return;
+            case OPTYPE_ORDI:   //简单指令只对目的操作数寻址
+                addressingDST(ins);
+                return;
+            case OPTYPE_COMP: //复杂指令对两个操作数寻址
+                addressingSRC(ins);
+                addressingDST(ins);
+                return;
+        }
+    }
+    catch(std::exception &e){
+        throw YabiExcept(ERRDCU, e.what());
     }
 }
 
-void ADU::addressingFor(std::unordered_map<addrmod_t, AddrFunc> &funcs, addrmod_t mod, iosize_t opsize, OrderedIO **op){
-    auto pair = funcs.find(mod);
-    if(pair == funcs.end()) throw YabiExcept(ERRADMOD, "Unsupported addrmod.");
-
-    MemAgent agent(rtb_, mem_);
-    pair -> second(rtb_, &agent, opsize, op);
+void ADU::addressingSRC(InstStruct *ins){
+    OrderedIO *op = selectIO(&srcbundle_, ins -> modsrc);
+    ins -> src = op;
+    addressingOn(ins -> modsrc, opsize2iosize(ins -> opsize), ins -> src);
 }
 
-void ADU::registerAddrFunc(std::unordered_map<addrmod_t, AddrFunc> &funcs){
-    funcs.insert({ADDRMOD_IMM, IMMAddr()});
-    funcs.insert({ADDRMOD_REG, REGAddr()}); 
-    funcs.insert({ADDRMOD_M_DIR, DIRAddr()}); 
-    funcs.insert({ADDRMOD_M_IND, INDAddr()}); 
-    funcs.insert({ADDRMOD_M_BAS, BASAddr()});
-    funcs.insert({ADDRMOD_M_IDX, IDXAddr()});
-    funcs.insert({ADDRMOD_M_BXI, BXIAddr()});
-    funcs.insert({ADDRMOD_M_SCA, SCAAddr()});
+void ADU::addressingDST(InstStruct *ins){
+    OrderedIO *op = selectIO(&srcbundle_, ins -> moddst);
+    ins -> dst = op;
+    addressingOn(ins -> modsrc, opsize2iosize(ins -> opsize), ins -> dst);
+}
+
+void ADU::addressingOn(addrmod_t mod, iosize_t size, OrderedIO *op){
+    /* 如果没有对应的寻址函数，则抛出异常 */
+    auto pair = addrfuncs_.find(mod);
+    if(pair == addrfuncs_.end()) throw YabiExcept(ERRADMOD, "Unsupported addrmod.");
+
+    /* 调用寻址函数寻址并设置操作数的IO对象 */
+    MemAgent agent(rtb_, mem_);
+    pair -> second(rtb_, &agent, size, op);
+}
+
+OrderedIO* ADU::selectIO(IOBundle *bundle, addrmod_t mod){
+    /* 根据寻址方式的不同返回相应的IO对象地址 */
+    switch(mod){
+        case ADDRMOD_IMM:
+            return &(bundle -> immop);
+        case ADDRMOD_REG:
+            return &(bundle -> regop);
+        default:
+            return &(bundle -> memop);
+    }
+}
+
+void ADU::registerAddrFunc(){
+    addrfuncs_.insert({ADDRMOD_IMM, addr_IMM});
+    addrfuncs_.insert({ADDRMOD_REG, addr_REG}); 
+    addrfuncs_.insert({ADDRMOD_M_DIR, addr_DIR}); 
+    addrfuncs_.insert({ADDRMOD_M_IND, addr_IND}); 
+    addrfuncs_.insert({ADDRMOD_M_BAS, addr_BAS});
+    addrfuncs_.insert({ADDRMOD_M_IDX, addr_IDX});
+    addrfuncs_.insert({ADDRMOD_M_BXI, addr_BXI});
+    addrfuncs_.insert({ADDRMOD_M_SCA, addr_SCA});
 }
 
 iosize_t ADU::opsize2iosize(opsize_t opsize){

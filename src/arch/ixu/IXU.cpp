@@ -5,6 +5,10 @@
 #include "arch/ixu/instfuncs.hpp"
 YABI_BEGIN
 
+/**
+ * 指令执行过程可概括为：IXU根据指令编码opcode找到对应的指令函数，然后使用适当的参数调用该函数即可
+ */
+
 IXU::IXU(RegTableIO *rtb, MemoryIO *mem, PeriDeviceIO *dev)
     : rtb_(rtb)
     , mem_(mem)
@@ -20,9 +24,6 @@ void IXU::execute(InstStruct *ins){
     /* 使用指令编码作为索引从指令集中找到对应的指令并调用 */
     try{
         inst_.at(ins -> opcode)(rtb_, mem_, dev_, ins);
-    }
-    catch(YabiExcept &e){
-        throw;
     }
     catch(std::exception &e){
         throw YabiExcept(ERROPCODE, e.what());
