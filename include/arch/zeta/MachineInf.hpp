@@ -3,7 +3,7 @@
 
 #include "def/types.hpp"
 #include "io/OrderedIO.hpp"
-#include "mcu/DebugFunc.hpp"
+#include "arch/mcu/DebugFunc.hpp"
 YABI_BEGIN
 
 /* 保存机器的各种属性 */
