@@ -4,10 +4,12 @@
 
 <div style="text-align: center;">
     <img src="https://img.shields.io/badge/github-YabiArch-blue?logo=github" alt="logo">
-	<img src="https://img.shields.io/github/license/LeafKwei/YabiArch" alt="GitHub"
+    <img src="https://img.shields.io/badge/VERSION-V0.0.1-green" alt="V0.0.1">
+	<img src="https://img.shields.io/github/license/LeafKwei/YabiArch" alt="MIT"
 		License" >
 	<img src="https://img.shields.io/badge/BUILD-PASSING-green" alt="BUILD">
 </div>
+
 
 
 # 目录

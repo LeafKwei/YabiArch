@@ -16,19 +16,19 @@ struct InstStruct;
 /* IXU(Instruction eXecution Unit，指令执行单元)用于执行虚拟机给定的指令 */
 class IXU{
 public:
-    IXU(RegTableIO *rtb, MemoryIO *mem, PeriDeviceIO *dev);
-    void execute(InstStruct *ins);
+    IXU(RegTableIO &rtb, MemoryIO &mem, PeriDeviceIO &dev);
+    void execute(InstStruct &ins);
 
 private:
-    RegTableIO *rtb_;
-    MemoryIO *mem_;
-    PeriDeviceIO *dev_;
+    RegTableIO &rtb_;
+    MemoryIO &mem_;
+    PeriDeviceIO &dev_;
     std::vector<InstFunc> inst_;
 
 private:
-    void registerTidyInstructions();
-    void registerOrdiInstructions();
-    void registerCompInstructions();
+    void registerNOPInstructions();
+    void registerSOPInstructions();
+    void registerDOPInstructions();
 };
 
 YABI_END

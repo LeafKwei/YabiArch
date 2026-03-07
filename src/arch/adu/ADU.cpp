@@ -1,9 +1,10 @@
-#include "arch/adu/ADU.hpp"
 #include "def/err.hpp"
 #include "def/opsize.hpp"
 #include "def/optype.hpp"
 #include "def/addrmod.hpp"
-#include "arch/InstStruct.hpp"
+#include "arch/adu/ADU.hpp"
+#include "arch/adu/addrfuncs.hpp"
+#include "arch/zeta/InstStruct.hpp"
 YABI_BEGIN
 
 /**
@@ -12,42 +13,42 @@ YABI_BEGIN
  * 操作数，无需关心操作数的来源
  */
 
-ADU::ADU(RegTableIO *rtb, MemoryIO *mem)
+ADU::ADU(RegTableIO &rtb, MemoryIO &mem)
     : rtb_(rtb)
     , mem_(mem)
 {
-    registerAddrFunc();
+    registerAddrFuncs();
 }
 
-void ADU::addressing(InstStruct *ins){
+void ADU::addressing(InstStruct &ins){
     try{
-        switch(ins -> optype){
-            case OPTYPE_TIDY:    //精简指令不进行寻址
+        switch(ins. optype){
+            case OPTYPE_NOP:  //无操作数指令不进行寻址
                 return;
-            case OPTYPE_ORDI:   //简单指令只对目的操作数寻址
+            case OPTYPE_SOP:   //单操作数指令只对目的操作数寻址
                 addressingDST(ins);
                 return;
-            case OPTYPE_COMP: //复杂指令对两个操作数寻址
+            case OPTYPE_DOP: //双操作数指令对两个操作数寻址
                 addressingSRC(ins);
                 addressingDST(ins);
                 return;
         }
     }
     catch(std::exception &e){
-        throw YabiExcept(ERRDCU, e.what());
+        throw YabiExcept(ERRADU, e.what());
     }
 }
 
-void ADU::addressingSRC(InstStruct *ins){
-    OrderedIO *op = selectIO(&srcbundle_, ins -> modsrc);
-    ins -> src = op;
-    addressingOn(ins -> modsrc, opsize2iosize(ins -> opsize), ins -> src);
+void ADU::addressingSRC(InstStruct &ins){
+    OrderedIO *op = selectIO(&srcbundle_, ins. modsrc);
+    ins. src = op;
+    addressingOn(ins. modsrc, opsize2iosize(ins. opsize), ins. src);
 }
 
-void ADU::addressingDST(InstStruct *ins){
-    OrderedIO *op = selectIO(&srcbundle_, ins -> moddst);
-    ins -> dst = op;
-    addressingOn(ins -> modsrc, opsize2iosize(ins -> opsize), ins -> dst);
+void ADU::addressingDST(InstStruct &ins){
+    OrderedIO *op = selectIO(&srcbundle_, ins. moddst);
+    ins. dst = op;
+    addressingOn(ins. modsrc, opsize2iosize(ins. opsize), ins. dst);
 }
 
 void ADU::addressingOn(addrmod_t mod, iosize_t size, OrderedIO *op){
@@ -57,7 +58,7 @@ void ADU::addressingOn(addrmod_t mod, iosize_t size, OrderedIO *op){
 
     /* 调用寻址函数寻址并设置操作数的IO对象 */
     MemAgent agent(rtb_, mem_);
-    pair -> second(rtb_, &agent, size, op);
+    pair -> second(rtb_, agent, size, op);
 }
 
 OrderedIO* ADU::selectIO(IOBundle *bundle, addrmod_t mod){
@@ -72,7 +73,7 @@ OrderedIO* ADU::selectIO(IOBundle *bundle, addrmod_t mod){
     }
 }
 
-void ADU::registerAddrFunc(){
+void ADU::registerAddrFuncs(){
     addrfuncs_.insert({ADDRMOD_IMM, addr_IMM});
     addrfuncs_.insert({ADDRMOD_REG, addr_REG}); 
     addrfuncs_.insert({ADDRMOD_M_DIR, addr_DIR}); 

@@ -2,16 +2,16 @@
 #include "def/reg.hpp"
 #include "def/optype.hpp"
 #include "def/eflag.hpp"
-#include "arch/YabiMachine.hpp"
+#include "arch/zeta/YabiMachine.hpp"
 YABI_BEGIN
 
 YabiMachine::YabiMachine()
     : ins_{}
     , inf_{}
-    , dcu_(&rtb_, &mem_)
-    , adu_(&rtb_, &mem_)
-    , ixu_(&rtb_, &mem_, &dev_)
-    , mcu_(&rtb_, &mem_)
+    , dcu_(rtb_, mem_)
+    , adu_(rtb_, mem_)
+    , ixu_(rtb_, mem_, dev_)
+    , mcu_(rtb_, mem_)
 {
 
 }
@@ -34,10 +34,10 @@ void YabiMachine::setDebug(DebugFunc dbg){
 void YabiMachine::start(){
     inf_.alive = true;
     while(inf_.alive){
-        dcu_.decode(&ins_);
-        adu_.addressing(&ins_);
-        ixu_.execute(&ins_);
-        mcu_.control(&inf_, &ins_);
+        dcu_.decode(ins_);
+        adu_.addressing(ins_);
+        ixu_.execute(ins_);
+        mcu_.control(inf_, ins_);
     }
 }
 

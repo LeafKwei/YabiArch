@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "arch/YabiMachine.hpp"
+#include "arch/zeta/YabiMachine.hpp"
 
 int main(int argc, char *argv[]){
     /* 检查参数 */

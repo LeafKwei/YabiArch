@@ -20,6 +20,9 @@ constexpr errnum_t Good = 0;
 constexpr errnum_t ERRADMOD = 1;     //错误的寻址模式
 constexpr errnum_t ERROPCODE = 2;     //错误的指令编码
 constexpr errnum_t ERRDCU= 3;            //解码出错
+constexpr errnum_t ERRADU = 4;           //寻址出错
+constexpr errnum_t ERRIXU = 5;             //执行出错
+constexpr errnum_t ERRMCU = 6;          //控制出错
 
 constexpr errnum_t ERRIOREG = 50;        //寄存器IO错误
 constexpr errnum_t ERRIOMEM = 51;      //内存IO错误

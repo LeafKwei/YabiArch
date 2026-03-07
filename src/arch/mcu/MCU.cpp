@@ -1,11 +1,10 @@
-#include "arch/mcu/MCU.hpp"
-#include "arch/MachineInf.hpp"
-#include "arch/InstStruct.hpp"
+#include "def/err.hpp"
 #include "io/reg/RegTableIO.hpp"
 #include "io/mem/MemoryIO.hpp"
-#include "def/reg.hpp"
-#include "def/eflag.hpp"
-#include "utility/bit.hpp"
+#include "arch/mcu/MCU.hpp"
+#include "arch/mcu/cntlfuncs.hpp"
+#include "arch/zeta/MachineInf.hpp"
+#include "arch/zeta/InstStruct.hpp"
 YABI_BEGIN
 
 /**
@@ -13,17 +12,31 @@ YABI_BEGIN
  * 由其处理具体的控制行为
  */
 
-MCU::MCU(RegTableIO *rtb, MemoryIO *mem)
+MCU::MCU(RegTableIO &rtb, MemoryIO &mem)
     : rtb_(rtb)
     , mem_(mem)
 {
 
 }
 
-void MCU::control(MachineInf *inf, InstStruct *ins){
-    if(hasbit(rtb_ -> in(QEF, sizeof(qword_t)), FLAG_SHUT)){
-        inf -> alive = false;
+void MCU::control(MachineInf &inf, InstStruct &ins){
+    try{
+        callEach(inf, ins);
     }
+    catch(std::exception &e){
+        throw YabiExcept(ERRMCU, e.what());
+    }
+}
+
+void MCU::callEach(MachineInf &inf, InstStruct &ins){
+    for(auto &cntl : cntlfuncs_){
+        cntl(rtb_, mem_, inf, ins);
+    }
+}
+
+void MCU::registerCntlFuncs(){
+    cntlfuncs_.push_back(cntl_check_shutflag);
+    cntlfuncs_.push_back(cntl_check_dbgflag);
 }
 
 YABI_END

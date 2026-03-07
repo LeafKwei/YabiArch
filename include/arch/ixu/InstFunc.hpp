@@ -18,7 +18,7 @@ struct InstStruct;
  * dev: 外部设备访问对象
  * ins: 指令结构对象
  */
-using InstFunc = std::function<void(RegTableIO *rtb, MemoryIO *mem, PeriDeviceIO *dev, InstStruct *ins)>;
+using InstFunc = std::function<void(RegTableIO &rtb, MemoryIO &mem, PeriDeviceIO &dev, InstStruct &ins)>;
 
 YABI_END
 #endif
