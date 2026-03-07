@@ -217,7 +217,7 @@ YabiArch的机器模型可参考下图：
 
 ## 5.1.编译yabi.exe
 
-YabiArch使用CMake+Make作为构建工具，笔者的测试平台为Win10+MingGW。我们先在YabiArch项目目录的上一级目录中创建一个build目录，以便稍后进行源外构建：
+YabiArch使用CMake+Make作为构建工具，笔者的测试平台为Win10+MinGW。我们先在YabiArch项目目录的上一级目录中创建一个build目录，以便稍后进行源外构建：
 
 ```
 /
