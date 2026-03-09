@@ -1,4 +1,4 @@
-set(BIN_NAME
+﻿set(BIN_NAME
     yabi
 )
 
@@ -7,11 +7,11 @@ set(DBG_NAME
 )
 
 set(COMMON_SRC
-    arch/YabiMachine.cpp
     arch/adu/ADU.cpp
     arch/dcu/DCU.cpp
     arch/ixu/IXU.cpp
     arch/mcu/MCU.cpp
+    arch/zeta/YabiMachine.cpp
 
     io/dev/PeriDeviceIO.cpp
     io/dev/term/TermIO.cpp
